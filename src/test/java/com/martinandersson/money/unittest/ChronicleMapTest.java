@@ -148,8 +148,8 @@ public class ChronicleMapTest
      * build methods are defined in the enclosing class and has names that begin
      * with "build".
      * 
-     * This test class could be completed removed if we accept some boiler plate
-     * to be copy-pasted in the test methods instead. For example, {@code
+     * This test class could be removed if we accept some boiler plate to be
+     * copy-pasted in the test methods instead. For example, {@code
      * test_double()} could be written something like this:
      * <pre>{@code
      * 
