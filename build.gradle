@@ -1,0 +1,103 @@
+apply plugin: 'java'
+
+sourceCompatibility = '1.8'
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    // Unit test framework.
+    // http://testng.org/
+    testCompile group: 'org.testng', name: 'testng', version: '6.9.10'
+    
+    // Java benchmarking.
+    // http://openjdk.java.net/projects/code-tools/jmh/
+    testCompile group: 'org.openjdk.jmh', name: 'jmh-core', version: '1.12'
+    testCompile group: 'org.openjdk.jmh', name: 'jmh-generator-annprocess', version: '1.12'
+    
+    // JSON Processing (JSR 353 reference impl.)
+    // https://jsonp.java.net/
+    testCompile group: 'org.glassfish', name: 'javax.json', version: '1.0.4'
+    
+    // Best persisted key-value off-heap goddess that exist.
+    // http://chronicle.software/products/chronicle-map/
+    testCompile group: 'net.openhft', name: 'chronicle-map', version: '3.8.0'
+    
+    // Moneta (JSR-354 reference impl.)
+    // http://javamoney.github.io/ri.html
+    testCompile group: 'org.javamoney', name: 'moneta', version: '1.1'
+    
+    // Kryo serialization framework.
+    // https://github.com/EsotericSoftware/kryo
+    testCompile group: 'com.esotericsoftware', name: 'kryo', version: '3.0.3'
+    
+    // FST serialization framework.
+    // https://github.com/RuedigerMoeller/fast-serialization
+    testCompile group: 'de.ruedigermoeller', name: 'fst', version: '2.47'
+}
+
+test {
+    useTestNG()
+    systemProperty 'gradle.test.temp.dir', temporaryDir as String
+    
+    // Always run the test task:
+    outputs.upToDateWhen {
+        false
+    }
+    
+    doLast {
+        println 'Done. See the report at: ' + reports.html.entryPoint
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.14'
+    description += " (version $gradleVersion)"
+}
+
+task bench(type: JavaExec, dependsOn: [classes, testClasses]) {
+    classpath = sourceSets.test.runtimeClasspath
+    main = 'com.martinandersson.money.benchmark.StartJmh';
+    
+    // Move our args to System properties for the JVM that boot the benchmark:
+    ['f', 'r'].each { prop ->
+        def arg = project.findProperty(prop) ?: System.properties[prop]
+        
+        if (arg) {
+            systemProperties += [(prop): arg]
+        }
+    }
+}
+
+[test, bench].each { task ->
+    def resourceDirs = sourceSets.test.resources.srcDirs
+    
+    if (resourceDirs.size() != 1) {
+        throw new IllegalStateException(
+                "Expected only 1 resource directory. Found ${resourceDirs.size()}.");
+    }
+    
+    task.systemProperties += ['gradle.resource.dir': resourceDirs[0].absolutePath]
+}
+
+javadoc {
+    classpath += sourceSets.test.compileClasspath
+    source += sourceSets.test.allJava
+    
+    // Add support for JDK 8 tags.
+    // Docs require "".
+    // See: http://docs.oracle.com/javase/8/docs/technotes/tools/windows/javadoc.html#tag
+    // ..But Gradle, or javadoc, will literally print the "" lol. So, they were removed.
+    options.tags += [
+            'implSpec:a:Implementation Requirements:',
+            'implNote:a:Implementation Note:']
+}
+
+// Source: http://stackoverflow.com/a/22183825
+gradle.projectsEvaluated {
+    tasks.withType(JavaCompile) {
+        options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+    }
+}
