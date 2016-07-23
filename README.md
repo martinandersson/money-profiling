@@ -54,7 +54,7 @@ The models in this project use the rather straight forward `double` and `BigDeci
 git clone https://github.com/MartinanderssonDotcom/money-profiling
 ```
 
-You don't have to install Gradle. This project uses a thing called [Gradle Wrapper] that will take care of that for you once `gradlew` is executed.
+You don't have to install Gradle. This project uses a thing called [Gradle Wrapper] that will take care of that for you once `gradlew` is executed. To be perfectly clear, you may run any shell command example in this document right out of the box.
 
 ### Unit tests
 
