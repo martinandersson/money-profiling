@@ -31,10 +31,7 @@ public class StartJmh
                 .include(getRegex())
                 .forks(1)
                 .addProfiler(MemoryUsageProfiler.class)
-                .jvmArgsAppend("-ea")
-                //TEST
-                .warmupIterations(0)
-                .measurementIterations(1);
+                .jvmArgsAppend("-ea");
         
         String file = SystemProperties.BENCHMARK_FILE.get();
         
