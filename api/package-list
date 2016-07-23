@@ -1,0 +1,6 @@
+com.martinandersson.money.benchmark
+com.martinandersson.money.lib
+com.martinandersson.money.lib.chroniclemap
+com.martinandersson.money.lib.model
+com.martinandersson.money.lib.serializer
+com.martinandersson.money.unittest
