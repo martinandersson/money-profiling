@@ -1,6 +1,6 @@
 # Java Money Profiling
 
-Java money profiling explores a few different ways to model a monetary amount in Java.
+**Java Money Profiling** explores a few different ways to model a monetary amount in Java.
 
 It also provides unit tests and benchmarks that demonstrate relevant API:s and output profiling results; most notably *time cost* for serialization and *byte sizes*.
 
