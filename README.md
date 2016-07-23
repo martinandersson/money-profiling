@@ -4,6 +4,8 @@ Explores a few different ways to model a monetary amount in Java.
 
 Provide unit tests and benchmarks that demonstrate relevant API:s and output profiling results; most notably *time cost* for serialization and *byte sizes*.
 
+JavaDoc provided [here].
+
 ### Tech
 
 * [Gradle] - Build tool.
@@ -31,7 +33,7 @@ If all financial markets out there traded instruments in USD, agreed on one sing
 
 Essentially, a financial application has to make a decision whether or not a high degree of accuracy is needed (`BigDecimal`), or if *performance* is a greater concern (something else than BigDecimal).
 
-I will leave the technical discussion for now. Please refer to links provided at the bottom.
+I will leave the technical discussion for now. Please refer to links provided at the [bottom](#double-versus-bigdecimal-links).
 
 ### Our models and approach
 
@@ -41,10 +43,10 @@ This project will mimic a complete life cycle of monetary amounts used in financ
 
 The models in this project use the rather straight forward `double` and `BigDecimal`, but will also take advantage of two [`MonetaryAmount`](https://github.com/JavaMoney/jsr354-api/blob/master/src/main/java/javax/money/MonetaryAmount.java) (JSR 354) implementations [`Money`](https://github.com/JavaMoney/jsr354-ri/blob/master/src/main/java/org/javamoney/moneta/Money.java) and [`FastMoney`](https://github.com/JavaMoney/jsr354-ri/blob/master/src/main/java/org/javamoney/moneta/FastMoney.java):
 
-* [DoublePrice.java] > `double` (javadoc).
-* [BigDecimalPrice.java] > `BigDecimal` (javadoc).
-* [MoneyPrice.java] > [`Money`](https://github.com/JavaMoney/jsr354-ri/blob/master/src/main/java/org/javamoney/moneta/Money.java) (javadoc).
-* [FastMoneyPrice.java] > [`FastMoney`](https://github.com/JavaMoney/jsr354-ri/blob/master/src/main/java/org/javamoney/moneta/FastMoney.java) (javadoc).
+* [DoublePrice.java] > `double`
+* [BigDecimalPrice.java] > `BigDecimal`
+* [MoneyPrice.java] > [`Money`](https://github.com/JavaMoney/jsr354-ri/blob/master/src/main/java/org/javamoney/moneta/Money.java)
+* [FastMoneyPrice.java] > [`FastMoney`](https://github.com/JavaMoney/jsr354-ri/blob/master/src/main/java/org/javamoney/moneta/FastMoney.java)
 
 ### Setup
 
@@ -120,7 +122,7 @@ gradlew bench
 
 ### Double versus BigDecimal links
 
-Let me take the moment to give praise to Chronicle Map as the best Java data store of its kind. The source code and documentation is absolutely amazing. Chronicle Map is a professional-graded solution clearly written by enthusiastic gurus.
+Let me take the moment to give praise to Chronicle Map as the best Java data store of its kind. The source code and documentation is absolutely amazing. Chronicle Map is clearly written by enthusiastic gurus.
 
 One of these gurus is [Peter Lawrey] who has authored numerous amount of blog posts about `double`versus `BigDecimal`:
 
@@ -136,6 +138,7 @@ Also noteworthy:
 
  - https://lemnik.wordpress.com/2011/03/25/bigdecimal-and-your-money/
 
+   [here]: <https://martinanderssondotcom.github.io/money-profiling/api/>
    [Gradle]: <https://gradle.org>
    [TestNG]: <http://testng.org>
    [JMH]: <http://openjdk.java.net/projects/code-tools/jmh>
@@ -146,24 +149,19 @@ Also noteworthy:
    [Kryo]: <https://github.com/EsotericSoftware/kryo>
    [JSR 353]: <https://jcp.org/en/jsr/detail?id=353>
    [JSON Processing]: <https://jsonp.java.net>
-   [jQuery]: <http://jquery.com>
-   [@tjholowaychuk]: <http://twitter.com/tjholowaychuk>
-   [express]: <http://expressjs.com>
-   [AngularJS]: <http://angularjs.org>
-   [Gulp]: <http://gulpjs.com>
    [Java serialization framework]: <https://docs.oracle.com/javase/8/docs/platform/serialization/spec/serialTOC.html>
-   [DoublePrice.java]: <https://github.com/xxx>
-   [BigDecimalPrice.java]: <https://github.com/xxx>
-   [MoneyPrice.java]: <https://github.com/xxx>
-   [FastMoneyPrice.java]: <https://github.com/xxx>
+   [DoublePrice.java]: <https://github.com/MartinanderssonDotcom/money-profiling/blob/master/src/test/java/com/martinandersson/money/lib/model/DoublePrice.java>
+   [BigDecimalPrice.java]: <https://github.com/MartinanderssonDotcom/money-profiling/blob/master/src/test/java/com/martinandersson/money/lib/model/BigDecimalPrice.java>
+   [MoneyPrice.java]: <https://github.com/MartinanderssonDotcom/money-profiling/blob/master/src/test/java/com/martinandersson/money/lib/model/MoneyPrice.java>
+   [FastMoneyPrice.java]: <https://github.com/MartinanderssonDotcom/money-profiling/blob/master/src/test/java/com/martinandersson/money/lib/model/FastMoneyPrice.java>
    [Gradle Wrapper]: <https://docs.gradle.org/current/userguide/gradle_wrapper.html>
-   [PriceSerializationTest.java]: <https://github.com/xxx>
-   [serialization framework]: <https://github.com/xxx>
-   [ChronicleMapTest.java]: <https://github.com/xxx>
+   [PriceSerializationTest.java]: <https://github.com/MartinanderssonDotcom/money-profiling/blob/master/src/test/java/com/martinandersson/money/unittest/PriceSerializationTest.java>
+   [serialization framework]: <https://github.com/MartinanderssonDotcom/money-profiling/blob/master/src/test/java/com/martinandersson/money/lib/serializer/SerializationFramework.java>
+   [ChronicleMapTest.java]: <https://github.com/MartinanderssonDotcom/money-profiling/blob/master/src/test/java/com/martinandersson/money/unittest/ChronicleMapTest.java>
    [Quandl]: <https://www.quandl.com>
-   [ChronicleMapBaselineBenchmark.java]: <https://github.com/xxx>
-   [ChronicleMapRealBenchmark.java]: <https://github.com/xxx>
-   [FastMoneyPrice]: <https://github.com/xxx>
-   [r]: <https://github.com/xxx>
-   [f]: <https://github.com/xxx>
+   [ChronicleMapBaselineBenchmark.java]: <https://github.com/MartinanderssonDotcom/money-profiling/blob/master/src/test/java/com/martinandersson/money/benchmark/ChronicleMapBaselineBenchmark.java>
+   [ChronicleMapRealBenchmark.java]: <https://github.com/MartinanderssonDotcom/money-profiling/blob/master/src/test/java/com/martinandersson/money/benchmark/ChronicleMapRealBenchmark.java>
+   [FastMoneyPrice]: <https://github.com/MartinanderssonDotcom/money-profiling/blob/master/src/test/java/com/martinandersson/money/lib/model/FastMoneyPrice.java>
+   [r]: <https://github.com/MartinanderssonDotcom/money-profiling/blob/master/src/test/java/com/martinandersson/money/lib/SystemProperties.java#L14-L44>
+   [f]: <https://github.com/MartinanderssonDotcom/money-profiling/blob/master/src/test/java/com/martinandersson/money/lib/SystemProperties.java#L46-L54>
    [Peter Lawrey]: <http://stackoverflow.com/users/57695>
