@@ -41,7 +41,7 @@ import org.openjdk.jmh.infra.Blackhole;
  * Chronicle Map with a Chronicle Map configured to use custom marshallers (see
  * {@link ChronicleMapRealBenchmark}).<p>
  * 
- * On author's machine, the winner was not too surprisingly the "create number"
+ * On author's machine, the winner was not too surprisingly the "create price"
  * benchmark. A close second was ConcurrentHashMap and a close third was
  * HashMap. "Vanilla" Chronicle Map on the other hand was almost 30 times as
  * slow as ConcurrentHashMap.<p>
